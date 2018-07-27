@@ -6,6 +6,8 @@ RUN export VERSION=$(node get-latest-version.js); wget https://github.com/docker
 
 FROM docker/compose:1.22.0
 
+WORKDIR /usr/src/app
+
 # docker-app
 COPY --from=build-env docker-app-linux.tar.gz .
 RUN tar xf docker-app-linux.tar.gz
@@ -13,4 +15,6 @@ RUN rm docker-app-linux.tar.gz
 RUN cp docker-app-linux /usr/local/bin/docker-app
 RUN rm docker-app-linux
 
-ENTRYPOINT [ "/bin/sh" ]
+COPY ./compose-config.sh ./
+
+ENTRYPOINT [ "./compose-config.sh" ]
