@@ -13,4 +13,4 @@ RUN rm docker-app-linux.tar.gz
 RUN cp docker-app-linux /usr/local/bin/docker-app
 RUN rm docker-app-linux
 
-ENTRYPOINT [ "/bin/sh" ]
+ENTRYPOINT ["/bin/sh", "-c"]
